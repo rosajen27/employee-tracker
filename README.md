@@ -28,7 +28,8 @@ A Content Management System for managing a company's employees using node, inqui
 
 
 ## Installation 
-
+`$ npm install mysql`
+`$ npm install inquirer`
 
 ## Usage
 
