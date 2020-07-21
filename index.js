@@ -280,7 +280,7 @@ function addRole(){
         type: "input",
         message: "Which role would you like to add?"
     }, {
-        name: "department",
+        name: "addrole",
         type: "list",
         message: "Into which department would you like to assign this role?",
         choices: departments
@@ -290,13 +290,13 @@ function addRole(){
         message: "What is the salary for this role?",
     }])
     .then(function(answer) {
-        if (answer.dept === "Sales") {
+        if (answer.addrole === "Sales") {
             var deparmentID = "1"
-        } else if (answer.dept === "Engineering") {
+        } else if (answer.addrole === "Engineering") {
             var deparmentID = "2"
-        } else if (answer.dept === "Finance") {
+        } else if (answer.addrole === "Finance") {
             var deparmentID = "3"
-        } else if (answer.dept === "Legal") {
+        } else if (answer.addrole === "Legal") {
             var deparmentID = "4"
         }
         connection.query(
@@ -312,5 +312,25 @@ function addRole(){
             }
         );
 
+    })
+}
+
+function addDepartment(){
+    inquirer.prompt([{
+        name: "adddepartment",
+        type: "input",
+        message: "Which department would you like to add?"
+    }])
+    .then(function(answer) {
+        connection.query(
+            `INSERT INTO department SET ?`, {
+                name: answer.adddepartment,
+            },
+            function(err) {
+                if (err) throw err;
+                console.log("Department Created Successfully!");
+                viewAllDepartments()
+            }
+        )
     })
 }
