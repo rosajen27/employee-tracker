@@ -308,7 +308,7 @@ function addRole(){
             function(err) {
                 if (err) throw err;
                 console.log("Role Created Successfully!");
-                vieAllwRoles();
+                viewAllRoles();
             }
         );
 
