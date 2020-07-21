@@ -209,3 +209,67 @@ function updateEmployeeRole() {
             })
     })
 }
+
+function addEmployee() {
+    inquirer.prompt([{
+        name: "first",
+        type: "input",
+        message: "What is the employee's first name?"
+    },
+    {
+        name: "last",
+        type: "input",
+        message: "What is the employee's last name?"
+    },
+    {
+        name: "role",
+        type: "list",
+        message: "What is the employee's role?",
+        choices: roles
+    },
+    {
+        name: "manager",
+        type: "list",
+        message: "Who is the employee's manager?",
+        choices: managers
+    }
+]).then(function(answer) {
+    if (answer.role === "Sales Lead") {
+        var roleid = "5"
+    } else if (answer.role === "Salesperson") {
+        var roleid = "6"
+    } else if (answer.role === "Lead Engineer") {
+        var roleid = "7"
+    } else if (answer.role === "Software Engineer") {
+        var roleid = "8"
+    } else if (answer.role === "Accountant") {
+        var roleid = "9"
+    } else if (answer.role === "Legal Team Lead") {
+        var roleid = "10"
+    } else if (answer.role === "Lawyer") {
+        var roleid = "11"
+    };
+    if (answer.manager === "John Doe") {
+        var managerid = "1"
+    } else if (answer.manager === "Ashley Rodriguez") {
+        var managerid = "3"
+    } else if (answer.manager === "Sarah Lourd") {
+        var managerid = "6"
+    } else if (answer.manager === "Mike Chan") {
+        var managerid = "2"
+    }
+    connection.query(
+        `INSERT INTO employee SET ?`, {
+            first_name: answer.first,
+            last_name: answer.last,
+            role_id: roleid,
+            manager_id: managerid,
+        },
+        function(err) {
+            if (err) throw err;
+            console.log("Employee Added Successfully!");
+            viewAllEmployees();
+        }
+    )
+})
+}
