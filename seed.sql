@@ -8,7 +8,7 @@ VALUES
 ("Kevin", "Tupik", 5, 3),
 ("Malia", "Brown", 9, null),
 ("Sarah", "Lourd", 10, null),
-("Tom", "Allen", 11, 7),
+("Tom", "Allen", 11, 6),
 ("Christian", "Eckenrode", 7, 2);
 
 INSERT INTO department (id, name)
