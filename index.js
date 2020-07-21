@@ -120,3 +120,28 @@ function viewAllRoles(){
         options()
     })
 }
+
+function viewEmployeesByDepartment() {
+    inquirer.prompt({
+        name: "departments",
+        type: "list",
+        message: "Please select the department of the employee",
+        choices: ["Sales",
+            "Engineering",
+            "Finance",
+            "Legal", 
+            "HR"
+        ]
+    }).then(function (answer) {
+        const department = answer.departments;
+        var query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary `
+        query += `FROM employee LEFT JOIN role ON employee.role_id = role.id `;
+        query += `LEFT JOIN department ON role.department_id = department.id WHERE department.name="${department}"`;
+        connection.query(query, function (err, res) {
+            if (err) throw err;
+             // Log all results of the SELECT statement
+            console.table(res)
+            options()
+        })
+    })
+}
