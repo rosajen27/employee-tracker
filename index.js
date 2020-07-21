@@ -40,3 +40,41 @@ function begin() {
                 "Add department",
             ]
         })
+        .then(function (answer) {
+            console.log(answer.options)
+            switch (answer.options) {
+                case "View all employees":
+                    viewAllEmployees();
+                    break;
+
+                case "View all departments":
+                    viewAllDepartments();
+                    break;
+
+                case "View all roles":
+                    viewAllRoles();
+                    break;
+
+                case "View employees by deparment":
+                    viewEmployeesByDepartment();
+                    break;
+
+                case "Update employee role":
+                    updateEmployeeRole();
+                    break;
+
+                case "Add employee":
+                    addEmployee();
+                    break;
+
+                case "Add role":
+                    addRole();
+                    break;
+
+                case "Add department":
+                    addDepartment();
+                    break;
+
+            }
+        });
+}
