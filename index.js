@@ -87,6 +87,7 @@ function begin() {
 console.log(query.sql);
 }
 
+// functions
 function viewAllEmployees() {
     var query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager `
     query += "FROM employee LEFT JOIN role ON employee.role_id = role.id ";
@@ -204,7 +205,7 @@ function updateEmployeeRole() {
                 ],
                     function (err,) {
                         if (err) throw err;
-                        console.log("Successfully updated!")
+                        console.log("Successfully Updated Employee Role!")
                     })
             })
     })
