@@ -1,15 +1,19 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
-const cTable = require('console.table');
+require('console.table');
 
 const departments = ["Sales", "Engineering", "Finance", "Legal"];
 const roles = ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Accountant", "Legal Team Lead", "Lawyer"];
 const managers = ["John Doe", "Ashley Rodriguez", "Malia Brown", "Sarah Lourd", "Kevin Tupik"];
 
+// create the connection information for the sql database
 var connection = mysql.createConnection({
     host: "localhost",
+    // Your port; if not 3306
     port: 3306,
+    // Your username
     user: "root",
+    // Your password
     password: "",
     database: "employee_DB"
 });
@@ -81,4 +85,17 @@ function begin() {
 
 // logs the actual query being run
 console.log(query.sql);
+}
+
+function viewAllEmployees() {
+    var query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.name AS department, role.salary, CONCAT(manager.first_name, ' ', manager.last_name) AS manager `
+    query += "FROM employee LEFT JOIN role ON employee.role_id = role.id ";
+    query += "LEFT JOIN department ON department.id = role.department_id ";
+    query += "LEFT JOIN employee AS manager ON manager.id = employee.manager_id";
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        // Log all results of the SELECT statement
+        console.table(res)
+        options()
+    })
 }
