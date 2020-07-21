@@ -22,8 +22,21 @@ connection.connect(function (err) {
     begin();
 });
 
-
-
-inquirer.prompt([/* Pass your questions in here */], function( answers ) {
-    // Use user feedback for... whatever!!
-});
+// begin prompts
+function begin() {
+    inquirer
+        .prompt({
+            name: "options",
+            type: "list",
+            message: "What would you like to do?",
+            choices: [
+                "View all employees",
+                "View all departments",
+                "View all roles",
+                "View employees by deparment",
+                "Update employee role",
+                "Add employee",
+                "Add role",
+                "Add department",
+            ]
+        })
