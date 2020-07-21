@@ -99,3 +99,15 @@ function viewAllEmployees() {
         options()
     })
 }
+
+function viewAllDepartments() {
+    inquirer.prompt({
+        name: "departments",
+        type: "list",
+        message: "Select the department of the employee",
+        choices: ["Sales",
+            "Engineering",
+            "Finance",
+            "Legal", 
+            "HR"
+        ]
