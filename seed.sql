@@ -25,5 +25,5 @@ VALUES
 (7, "Lead Engineer", 150000.00, 2),
 (8, "Software Engineer", 120000.00, 2),
 (9, "Accountant", 125000.00, 3),
-*(10, "Legal Team Lead", 250000.00, 4),
+(10, "Legal Team Lead", 250000.00, 4),
 (11, "Lawyer", 190000.00, 4);
