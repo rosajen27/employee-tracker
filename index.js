@@ -104,6 +104,18 @@ function viewAllDepartments(){
     var query = `SELECT department.id, department.name FROM department`
     connection.query(query, function (err, res) {
         if (err) throw err;
+        // Log all results of the SELECT statement
+        console.table(res)
+        options()
+    })
+}
+
+function viewAllRoles(){
+    var query = `SELECT role.id, role.title, role.salary, department.name as department FROM role
+                 LEFT JOIN department ON role.department_id = department.id`
+    connection.query(query, function (err, res) {
+        if (err) throw err;
+        // Log all results of the SELECT statement
         console.table(res)
         options()
     })
