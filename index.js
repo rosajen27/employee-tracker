@@ -14,6 +14,14 @@ var connection = mysql.createConnection({
     database: "employee_DB"
 });
 
+connection.connect(function (err) {
+    if (err) {
+        console.log(err);
+    }
+    console.log("connected as id", connection.threadId + "\n");
+    begin();
+});
+
 
 
 inquirer.prompt([/* Pass your questions in here */], function( answers ) {
