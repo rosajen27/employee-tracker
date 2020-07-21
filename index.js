@@ -100,7 +100,7 @@ function viewAllEmployees() {
     })
 }
 
-function viewAllDepartments(){
+function viewAllDepartments() {
     var query = `SELECT department.id, department.name FROM department`
     connection.query(query, function (err, res) {
         if (err) throw err;
@@ -110,7 +110,7 @@ function viewAllDepartments(){
     })
 }
 
-function viewAllRoles(){
+function viewAllRoles() {
     var query = `SELECT role.id, role.title, role.salary, department.name as department FROM role
                  LEFT JOIN department ON role.department_id = department.id`
     connection.query(query, function (err, res) {
@@ -129,7 +129,7 @@ function viewEmployeesByDepartment() {
         choices: ["Sales",
             "Engineering",
             "Finance",
-            "Legal", 
+            "Legal",
             "HR"
         ]
     }).then(function (answer) {
@@ -139,9 +139,73 @@ function viewEmployeesByDepartment() {
         query += `LEFT JOIN department ON role.department_id = department.id WHERE department.name="${department}"`;
         connection.query(query, function (err, res) {
             if (err) throw err;
-             // Log all results of the SELECT statement
+            // Log all results of the SELECT statement
             console.table(res)
             options()
         })
+    })
+}
+
+function updateEmployeeRole() {
+    connection.query("SELECT id, first_name, last_name FROM employee", function (err, result) {
+        if (err) throw err;
+        const employeeName = [];
+        for (let i = 0; i < result.length; i++) {
+            const choices = (result[i].first_name + " " + result[i].last_name);
+            employeeName.push(choices);
+        }
+        inquirer.prompt([{
+            name: "employee",
+            type: "list",
+            message: "Which employee would you like to update?",
+            choices: employeeName
+        },
+        {
+            name: "newRole",
+            type: "list",
+            message: "What is the employee's new role?",
+            choices: [
+                "Sales Lead",
+                "Salesperson",
+                "Lead Engineer",
+                "Software Engineer",
+                "Accountant",
+                "Legal Team Lead",
+                "Lawyer",
+                "Lead Engineer"
+            ]
+        }
+        ])
+            .then(function (answer) {
+                const employeeName = answer.employee;
+                if (answer.newRole === "Sales Lead") {
+                    var roleID = "1";
+                } else if (answer.newRole === "Salesperson") {
+                    var roleID = "2";
+                } else if (answer.newRole === "Lead Engineer") {
+                    var roleID = "3";
+                } else if (answer.newRole === "Software Engineer") {
+                    var roleID = "4";
+                } else if (answer.newRole === "Accountant") {
+                    var roleID = "5";
+                } else if (answer.newRole === "Legal Team Lead") {
+                    var roleID = "6";
+                } else if (answer.newRole === "Lawyer") {
+                    var roleID = "7";
+                } else if (answer.newRole === "Lead Engineer") {
+                    var roleID = "8";
+                }
+                connection.query(`UPDATE employee SET ? WHERE ?`, [{
+                    role_id: answer.roleID
+                },
+                {
+                    id: answer.id
+                }
+                ],
+                    function (err,) {
+                        if (err) throw err;
+                        console.log("Successfully updated!")
+                    })
+            })
     })
 }
