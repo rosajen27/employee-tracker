@@ -273,3 +273,44 @@ function addEmployee() {
     )
 })
 }
+
+function addRole(){
+    inquirer.prompt([{
+        name: "role",
+        type: "input",
+        message: "Which role would you like to add?"
+    }, {
+        name: "department",
+        type: "list",
+        message: "Into which department would you like to assign this role?",
+        choices: departments
+    }, {
+        name: "salary",
+        type: "input",
+        message: "What is the salary for this role?",
+    }])
+    .then(function(answer) {
+        if (answer.dept === "Sales") {
+            var deparmentID = "1"
+        } else if (answer.dept === "Engineering") {
+            var deparmentID = "2"
+        } else if (answer.dept === "Finance") {
+            var deparmentID = "3"
+        } else if (answer.dept === "Legal") {
+            var deparmentID = "4"
+        }
+        connection.query(
+            `INSERT INTO role SET ?`, {
+                title: answer.role,
+                salary: answer.salary,
+                department_id: deparmentID
+            },
+            function(err) {
+                if (err) throw err;
+                console.log("Role Created Successfully!");
+                viewRoles();
+            }
+        );
+
+    })
+}
