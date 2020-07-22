@@ -108,8 +108,8 @@ function viewAllDepartments() {
 }
 
 function viewAllRoles() {
-    var query = `SELECT role.id, role.title, role.salary, department.name as department FROM role
-                 LEFT JOIN department ON role.department_id = department.id`
+    var query = `SELECT role.id, role.title, role.salary, department.name as department FROM role 
+    LEFT JOIN department ON role.department_id = department.id`
     connection.query(query, function (err, res) {
         if (err) throw err;
         // Log all results of the SELECT statement
@@ -123,11 +123,11 @@ function viewEmployeesByDepartment() {
         name: "departments",
         type: "list",
         message: "Please select the department of the employee",
-        choices: ["Sales",
+        choices: [
+            "Sales",
             "Engineering",
             "Finance",
-            "Legal",
-            "HR"
+            "Legal"
         ]
     }).then(function (answer) {
         const department = answer.departments;
@@ -277,7 +277,7 @@ function addRole() {
         type: "input",
         message: "Which role would you like to add?"
     }, {
-        name: "addrole",
+        name: "dept",
         type: "list",
         message: "Into which department would you like to assign this role?",
         choices: departments
@@ -287,20 +287,20 @@ function addRole() {
         message: "What is the salary for this role?",
     }])
         .then(function (answer) {
-            if (answer.addrole === "Sales") {
-                var deparmentID = "1"
-            } else if (answer.addrole === "Engineering") {
-                var deparmentID = "2"
-            } else if (answer.addrole === "Finance") {
-                var deparmentID = "3"
-            } else if (answer.addrole === "Legal") {
-                var deparmentID = "4"
+            if (answer.dept === "Sales") {
+                var depID = "1"
+            } else if (answer.dept === "Engineering") {
+                var depID = "2"
+            } else if (answer.dept === "Finance") {
+                var depID = "3"
+            } else if (answer.dept === "Legal") {
+                var depID = "4"
             }
             connection.query(
                 `INSERT INTO role SET ?`, {
                 title: answer.role,
                 salary: answer.salary,
-                department_id: deparmentID
+                department_id: depID
             },
                 function (err) {
                     if (err) throw err;
