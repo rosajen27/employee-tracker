@@ -81,10 +81,10 @@ function begin() {
 
             }
         });
-}
 
-// logs the actual query being run
-console.log(query.sql);
+
+    // logs the actual query being run
+    console.log(query.sql);
 }
 
 // functions
@@ -234,48 +234,48 @@ function addEmployee() {
         message: "Who is the employee's manager?",
         choices: managers
     }
-]).then(function(answer) {
-    if (answer.role === "Sales Lead") {
-        var roleid = "5"
-    } else if (answer.role === "Salesperson") {
-        var roleid = "6"
-    } else if (answer.role === "Lead Engineer") {
-        var roleid = "7"
-    } else if (answer.role === "Software Engineer") {
-        var roleid = "8"
-    } else if (answer.role === "Accountant") {
-        var roleid = "9"
-    } else if (answer.role === "Legal Team Lead") {
-        var roleid = "10"
-    } else if (answer.role === "Lawyer") {
-        var roleid = "11"
-    };
-    if (answer.manager === "John Doe") {
-        var managerid = "1"
-    } else if (answer.manager === "Ashley Rodriguez") {
-        var managerid = "3"
-    } else if (answer.manager === "Sarah Lourd") {
-        var managerid = "6"
-    } else if (answer.manager === "Mike Chan") {
-        var managerid = "2"
-    }
-    connection.query(
-        `INSERT INTO employee SET ?`, {
+    ]).then(function (answer) {
+        if (answer.role === "Sales Lead") {
+            var roleid = "5"
+        } else if (answer.role === "Salesperson") {
+            var roleid = "6"
+        } else if (answer.role === "Lead Engineer") {
+            var roleid = "7"
+        } else if (answer.role === "Software Engineer") {
+            var roleid = "8"
+        } else if (answer.role === "Accountant") {
+            var roleid = "9"
+        } else if (answer.role === "Legal Team Lead") {
+            var roleid = "10"
+        } else if (answer.role === "Lawyer") {
+            var roleid = "11"
+        };
+        if (answer.manager === "John Doe") {
+            var managerid = "1"
+        } else if (answer.manager === "Ashley Rodriguez") {
+            var managerid = "3"
+        } else if (answer.manager === "Sarah Lourd") {
+            var managerid = "6"
+        } else if (answer.manager === "Mike Chan") {
+            var managerid = "2"
+        }
+        connection.query(
+            `INSERT INTO employee SET ?`, {
             first_name: answer.first,
             last_name: answer.last,
             role_id: roleid,
             manager_id: managerid,
         },
-        function(err) {
-            if (err) throw err;
-            console.log("Employee Added Successfully!");
-            viewAllEmployees();
-        }
-    )
-})
+            function (err) {
+                if (err) throw err;
+                console.log("Employee Added Successfully!");
+                viewAllEmployees();
+            }
+        )
+    })
 }
 
-function addRole(){
+function addRole() {
     inquirer.prompt([{
         name: "role",
         type: "input",
@@ -290,48 +290,48 @@ function addRole(){
         type: "input",
         message: "What is the salary for this role?",
     }])
-    .then(function(answer) {
-        if (answer.addrole === "Sales") {
-            var deparmentID = "1"
-        } else if (answer.addrole === "Engineering") {
-            var deparmentID = "2"
-        } else if (answer.addrole === "Finance") {
-            var deparmentID = "3"
-        } else if (answer.addrole === "Legal") {
-            var deparmentID = "4"
-        }
-        connection.query(
-            `INSERT INTO role SET ?`, {
+        .then(function (answer) {
+            if (answer.addrole === "Sales") {
+                var deparmentID = "1"
+            } else if (answer.addrole === "Engineering") {
+                var deparmentID = "2"
+            } else if (answer.addrole === "Finance") {
+                var deparmentID = "3"
+            } else if (answer.addrole === "Legal") {
+                var deparmentID = "4"
+            }
+            connection.query(
+                `INSERT INTO role SET ?`, {
                 title: answer.role,
                 salary: answer.salary,
                 department_id: deparmentID
             },
-            function(err) {
-                if (err) throw err;
-                console.log("Role Created Successfully!");
-                viewAllRoles();
-            }
-        );
+                function (err) {
+                    if (err) throw err;
+                    console.log("Role Created Successfully!");
+                    viewAllRoles();
+                }
+            );
 
-    })
+        })
 }
 
-function addDepartment(){
+function addDepartment() {
     inquirer.prompt([{
         name: "adddepartment",
         type: "input",
         message: "Which department would you like to add?"
     }])
-    .then(function(answer) {
-        connection.query(
-            `INSERT INTO department SET ?`, {
+        .then(function (answer) {
+            connection.query(
+                `INSERT INTO department SET ?`, {
                 name: answer.adddepartment,
             },
-            function(err) {
-                if (err) throw err;
-                console.log("Department Created Successfully!");
-                viewAllDepartments()
-            }
-        )
-    })
+                function (err) {
+                    if (err) throw err;
+                    console.log("Department Created Successfully!");
+                    viewAllDepartments()
+                }
+            )
+        })
 }
