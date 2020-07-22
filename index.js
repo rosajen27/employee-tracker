@@ -22,7 +22,7 @@ connection.connect(function (err) {
     if (err) {
         console.log(err);
     }
-    console.log("connected as id", connection.threadId + "\n");
+    console.log("Connected as id: ", connection.threadId + "\n");
     begin();
 });
 
@@ -30,7 +30,7 @@ connection.connect(function (err) {
 function begin() {
     inquirer
         .prompt({
-            name: "options",
+            name: "optionsList",
             type: "list",
             message: "What would you like to do?",
             choices: [
@@ -45,8 +45,8 @@ function begin() {
             ]
         })
         .then(function (answer) {
-            console.log(answer.options)
-            switch (answer.options) {
+            console.log(answer.optionsList)
+            switch (answer.optionsList) {
                 case "View all employees":
                     viewAllEmployees();
                     break;
@@ -81,10 +81,6 @@ function begin() {
 
             }
         });
-
-
-    // logs the actual query being run
-    console.log(query.sql);
 }
 
 // functions
@@ -97,7 +93,7 @@ function viewAllEmployees() {
         if (err) throw err;
         // Log all results of the SELECT statement
         console.table(res)
-        options()
+        begin();
     })
 }
 
@@ -107,7 +103,7 @@ function viewAllDepartments() {
         if (err) throw err;
         // Log all results of the SELECT statement
         console.table(res)
-        options()
+        begin()
     })
 }
 
@@ -118,7 +114,7 @@ function viewAllRoles() {
         if (err) throw err;
         // Log all results of the SELECT statement
         console.table(res)
-        options()
+        begin()
     })
 }
 
@@ -142,7 +138,7 @@ function viewEmployeesByDepartment() {
             if (err) throw err;
             // Log all results of the SELECT statement
             console.table(res)
-            options()
+            begin()
         })
     })
 }
