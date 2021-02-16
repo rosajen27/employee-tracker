@@ -2,20 +2,21 @@
 
 A Content Management System for managing a company's employees. This interface makes it easy for non-developers to view and interact with information stored in databases.
 
+A command-line application that allows the user to:
+* Add departments, roles, employees
+* View departments, roles, employees
+* Update employee roles
+
 
 ## Table of Contents
 * [Deployment](#deployment)
 * [Built With](#built-with)
-* [Installation](#installation)
-* [Usage](#usage)
 * [Authors](#authors)
 * [License](#license)
 * [Acknowledgements](#acknowledgement)
 
 
 ## Deployment
-
-![employee-tracker](./assets/images/demo.png)
 
 ![employee-tracker](./assets/images/demo2.gif)
 
@@ -25,19 +26,6 @@ A Content Management System for managing a company's employees. This interface m
 * Node.js
 * inquirer
 * MySQL
-
-
-## Installation 
-`npm install mysql`
-`npm install inquirer`
-`npm install console.table`
-
-## Usage
-
-A command-line application that allows the user to:
-* Add departments, roles, employees
-* View departments, roles, employees
-* Update employee roles
 
 
 ## Authors
@@ -52,7 +40,7 @@ A command-line application that allows the user to:
 
 This project is licensed under the MIT License.
 
-Copyright (c) 2020 Jennifer Rosa
+Copyright (c) 2021 Jennifer Rosa
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
